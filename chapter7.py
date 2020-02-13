@@ -1,8 +1,16 @@
+def isfloat(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+
 def prompt_for_numeric(prompt: str):
     while 1:
         value = input(prompt + ' --> ')
-        if not value or not value.isnumeric():
-            print("I need numeric value without symbols")
+        if not value or not isfloat(value):
+            print("I need numeric value")
         else:
             break
     return value
@@ -19,9 +27,9 @@ def main():
     print(dash)
     print('{:<10s}{:>4s}{:>12s}'.format('Year', 'Initial', 'Final'))
     print(dash)
-    interest_fraction = float(interest)/100
+    interest_fraction = float(interest) / 100
     acumulator = float(initial)
-    for year in range(1, int(years)+1):
+    for year in range(1, int(years) + 1):
         final = acumulator + acumulator * interest_fraction
         print('{:<10d}{:>4.2f}{:>12.2f}'.format(year, acumulator, final))
         acumulator = final
